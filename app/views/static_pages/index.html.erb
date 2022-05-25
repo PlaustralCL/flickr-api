@@ -1,5 +1,10 @@
 <h1>Static pages</h1>
 
-<% @photos.each do |image| %>
-  <%= image_tag(image) %>
+<% if @photos.empty? %>
+  <p>No images available for that user</p>
+<% else %>
+  <% @photos.each do |image| %>
+    <%= image_tag(image) %>
+  <% end %>
 <% end %>
+
