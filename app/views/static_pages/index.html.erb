@@ -1,3 +1,5 @@
 <h1>Static pages</h1>
 
-<%= image_tag(@photo) %>
+<% @photos.each do |image| %>
+  <%= image_tag(image) %>
+<% end %>

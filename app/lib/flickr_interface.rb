@@ -17,8 +17,16 @@ class FlickrInterface
     image_list["photos"]["photo"]
   end
 
-  def self.photo_uri(server:, photo_id:, photo_secret:)
-    uri = URI("https://live.staticflickr.com/#{server}/#{photo_id}_#{photo_secret}_q.jpg").to_s
+  def self.photo_uri(image_details)
+    server = image_details["server"]
+    photo_id = image_details["id"]
+    photo_secret = image_details["secret"]
+    URI("https://live.staticflickr.com/#{server}/#{photo_id}_#{photo_secret}_q.jpg").to_s
   end
+
+  def self.get_photos(image_list)
+    image_list.map { |image| photo_uri(image) }
+  end
+
 
 end
