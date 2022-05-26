@@ -19,9 +19,17 @@ class FlickrInterface
 
     uri = URI("https://www.flickr.com/services/rest/")
     uri.query = URI.encode_www_form(params)
-    image_list = Net::HTTP.get(uri)
-    image_list = JSON.parse(image_list)
-    image_list["photos"]["photo"]
+    search_results = Net::HTTP.get(uri)
+    search_results = JSON.parse(search_results)
+    validate_search(search_results)
+  end
+
+  def validate_search(search_results)
+    if search_results["stat"] == "fail"
+      []
+    else
+      search_results["photos"]["photo"]
+    end
   end
 
   def photo_uri(image_details)
