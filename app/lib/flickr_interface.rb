@@ -5,7 +5,8 @@ class FlickrInterface
 
   def photos(user_id)
     search_results = photo_search(user_id)
-    get_photos(search_results)
+    search_results = add_thumbnail(search_results)
+    add_image_link(search_results)
   end
 
   private
@@ -32,15 +33,25 @@ class FlickrInterface
     end
   end
 
-  def photo_uri(image_details)
+  def thumbnail_uri(image_details)
     server = image_details["server"]
     photo_id = image_details["id"]
     photo_secret = image_details["secret"]
     URI("https://live.staticflickr.com/#{server}/#{photo_id}_#{photo_secret}_q.jpg").to_s
   end
 
-  def get_photos(search_results)
-    search_results.map { |image| photo_uri(image) }
+  def image_uri(image_details)
+    user_id = image_details["owner"]
+    photo_id = image_details["id"]
+    URI("https://www.flickr.com/photos/#{user_id}/#{photo_id}")
+  end
+
+  def add_thumbnail(search_results)
+    search_results.each { |image| image["thumbnail"] = thumbnail_uri(image) }
+  end
+
+  def add_image_link(search_results)
+    search_results.each { |image| image["image_link"] = image_uri(image) }
   end
 
 

@@ -4,7 +4,9 @@
   <p>No images available for that user</p>
 <% else %>
   <% @photos.each do |image| %>
-    <%= image_tag(image) %>
+    <a href=<%= image["image_link"] %>>
+      <%= image_tag(image["thumbnail"], alt: image["title"]) %>
+    </a>
   <% end %>
 <% end %>
 
