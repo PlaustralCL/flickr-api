@@ -1,12 +1,24 @@
 <h1>Static pages</h1>
+<h2><%= @user_id %></h2>
 
-<% if @photos.empty? %>
-  <p>No images available for that user</p>
-<% else %>
-  <% @photos.each do |image| %>
-    <a href=<%= image["image_link"] %>>
-      <%= image_tag(image["thumbnail"], alt: image["title"]) %>
-    </a>
-  <% end %>
+<%= form_with url: static_pages_url, method: :get do |form| %>
+  <%= form.label :user_id, "User id:" %>
+  <%= form.text_field :user_id %>
+  <%= form.submit "Search" %>
 <% end %>
+
+
+<% if @user_id %>
+  <% if @photos.empty? %>
+    <p>No images available for that user</p>
+  <% else %>
+    <% @photos.each do |image| %>
+      <a href=<%= image["image_link"] %>>
+        <%= image_tag(image["thumbnail"], alt: image["title"]) %>
+      </a>
+    <% end %>
+  <% end %>
+
+<% end %>
+
 
