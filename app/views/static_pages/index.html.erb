@@ -1,14 +1,17 @@
 <div class="search">
-  <h1>Static pages</h1>
+  <h1>Flickr Search</h1>
 
   <%= form_with url: static_pages_url, method: :get do |form| %>
-    <%= form.label :user_id, "User id:" %>
-    <%= form.text_field :user_id %>
-    <%= form.submit "Search" %>
+    <p class="search__text">Enter a Flickr ID to see their photos</p>
+      <%= form.label :user_id, "User ID:" %>
+    <div class="search__row">
+      <%= form.text_field :user_id, placeholder: "31779113@N06", class: "search__input" %>
+      <%= form.submit "Search", class: "search__button" %>
+    </div>
   <% end %>
-  <div>
-    <%= link_to "Reset", static_pages_path %>
-    <%= link_to "I'm Feeling Lucky", static_pages_path(user_id: @sample_id) %>
+  <div class="search__row">
+    <%= link_to "Reset", static_pages_path, class: "search__link" %>
+    <%= link_to "I'm Feeling Lucky", static_pages_path(user_id: @sample_id), class: "search__link" %>
   </div>
 </div>
 
