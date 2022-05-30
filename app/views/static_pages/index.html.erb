@@ -5,7 +5,7 @@
     <p class="search__text">Enter a Flickr ID to see their photos</p>
       <%= form.label :user_id, "User ID:" %>
     <div class="search__row">
-      <%= form.text_field :user_id, placeholder: "31779113@N06", class: "search__input" %>
+      <%= form.text_field :user_id, placeholder: "31779113@N06", required: true, class: "search__input" %>
       <%= form.submit "Search", class: "search__button" %>
     </div>
   <% end %>
