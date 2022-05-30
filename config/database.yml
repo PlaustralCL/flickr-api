@@ -86,8 +86,10 @@ test:
 # Read https://guides.rubyonrails.org/configuring.html#configuring-a-database
 # for a full overview on how database connection configuration can be specified.
 #
+
 production:
   <<: *default
-  database: flickr_production
-  username: flickr
-  password: <%= ENV["FLICKR_DATABASE_PASSWORD"] %>
+  adapter: postgresql
+  database: my_database_production
+  pool: 5
+  timeout: 5000
